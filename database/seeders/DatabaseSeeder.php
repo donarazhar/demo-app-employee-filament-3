@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CountrySeeder;
-use Database\Seeders\CitiesTableSeeder;
 use Database\Seeders\StatesTableSeeder;
+use Database\Seeders\CitiesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,5 +30,7 @@ class DatabaseSeeder extends Seeder
             StatesTableSeeder::class,
             CitiesTableSeeder::class,
         ]);
+
+        Department::create(['name' => 'Laravel']);
     }
 }
