@@ -30,7 +30,5 @@ class DatabaseSeeder extends Seeder
             StatesTableSeeder::class,
             CitiesTableSeeder::class,
         ]);
-
-        Department::create(['name' => 'Laravel']);
     }
 }
