@@ -27,6 +27,16 @@ class DepartmentResource extends Resource
     protected static ?string $slug = 'employees-departments';
     protected static ?int $navigationSort = 4;
 
+    public static function getNavigationBadge(): ?string 
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null 
+    {
+        return static::getModel()::count() >= 2 ? 'primary' : 'danger';
+    }
+
 
     public static function form(Form $form): Form
     {

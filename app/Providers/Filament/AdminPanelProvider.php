@@ -41,6 +41,12 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
             ])
             ->font('Poppins')
+            ->navigationGroups([
+                'Employee Management',
+                'System Management',
+                'User Management',
+                'Filament Shield'
+            ])
             ->brandName('Employee APP')
             ->favicon(asset('storage/file-web/logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
