@@ -16,6 +16,7 @@ use Filament\Forms\Set;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
@@ -36,16 +37,16 @@ class EmployeeResource extends Resource
     protected static ?string $navigationGroup = 'Employee Management';
     protected static ?string $recordTitleAttribute = 'first_name';
 
-    public static function getGlobalSearchResultTitle(Model $record): string 
+    public static function getGlobalSearchResultTitle(Model $record): string
     {
         return $record->last_name;
     }
-    
-    public static function getGloballySearchableAttributes(): array 
+
+    public static function getGloballySearchableAttributes(): array
     {
-        return ['first_name', 'last_name','middle_name','country.name'];
+        return ['first_name', 'last_name', 'middle_name', 'country.name'];
     }
-    
+
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
@@ -58,12 +59,12 @@ class EmployeeResource extends Resource
         return parent::getGlobalSearchEloquentQuery()->with(['country']);
     }
 
-    public static function getNavigationBadge(): ?string 
+    public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
 
-    public static function getNavigationBadgeColor(): string|array|null 
+    public static function getNavigationBadgeColor(): string|array|null
     {
         return static::getModel()::count() >= 2 ? 'primary' : 'danger';
     }
@@ -220,6 +221,13 @@ class EmployeeResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Employee deleted')
+                            ->body('The Employee deleted successfully')
+                    )
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
