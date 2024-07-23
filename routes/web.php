@@ -8,7 +8,7 @@ use App\Http\Controllers\InvoiceController;
 // });
 
 Route::get('/', function () {
-    return redirect()->route('filament.admin.auth.login');
+    return redirect()->route('filament.app.auth.login');
 });
 
 Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
